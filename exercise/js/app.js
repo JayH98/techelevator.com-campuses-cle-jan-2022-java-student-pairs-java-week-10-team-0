@@ -1,20 +1,26 @@
 
-let problem;
+let problems = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+];
+let answer = null;
 const maxNum = 10;
+let mathProblems = [
+    (1 * 2), (2 * 2), (3 * 3), (4 * 4), (5 * 5), (6 * 2), (7 * 3), (8 * 4), (9 * 9)
+];
 
 
 
 function getRandomNumber(maxNum) {
     return Math.floor(Math.random() * Math.floor(maxNum));
-  }
+}
 
 /**
  * Parses the display value into a number (float or int).
  * @param {String} num 
  */
- function parseNumber(num) {
+function parseNumber(num) {
     return num.includes('.') ? parseFloat(num) : parseInt(num);
-  }
+}
 
 
 
