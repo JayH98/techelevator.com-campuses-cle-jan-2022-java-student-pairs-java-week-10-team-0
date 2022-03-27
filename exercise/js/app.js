@@ -30,10 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAnswers = getAnswerArray();
     for (i = 0; i < displayAnswers.length; i++) {
         displayAnswers[i].innerText = currentAnswers[i];
-    }
-        
+    }   
 
 });
+
+
+/**
+ * TODO make answers clickable; add to current and cumulative score;
+ *          move to next problem in problem set (10) -- FOR EACH
+ * TODO tally score (logic for correct and incorrect answers); display score
+ * TODO Start Over single click resets currentProblem
+ *      Start Over double click rests problem sets && score
+ */ 
+
+
 
 
 
