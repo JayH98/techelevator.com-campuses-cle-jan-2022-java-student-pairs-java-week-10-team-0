@@ -1,54 +1,70 @@
+
+
 let correctAnswer = null;
 let currentExpression = null;
 
-function getRandomProblem() {
-    let num1 = getRandomNumber(10);
-    let num2 = getRandomNumber(10);
-    correctAnswer = num1 * num2;
-    currentExpression = num1+ ' x ' + num2;
-}
-
 function getRandomNumber(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 function getAnswerArray() {
-    let answerArray = [getRandomNumber(82), getRandomNumber(82), getRandomNumber(82), correctAnswer];
-    return shuffleArray(answerArray);
+  let answerArray = [getRandomNumber(82), getRandomNumber(82), 
+    getRandomNumber(82), correctAnswer];
+  return shuffleArray(answerArray);
+}
+
+function getRandomProblem() {
+  let num1 = getRandomNumber(10);
+  let num2 = getRandomNumber(10);
+  correctAnswer = num1 * num2;
+  currentExpression = num1 + ' x ' + num2;
 }
 
 function shuffleArray(arr) {
-    return arr.sort(function (a, b) { return Math.random() - 0.5 })
+  return arr.sort(function (a, b) { return Math.random() - 0.5 })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const currentProblem = document.querySelector('.expression');
-    getRandomProblem();
-    currentProblem.innerText = currentExpression;
+  const currentProblem = document.querySelector('.expression');
+  getRandomProblem();
+  currentProblem.innerText = currentExpression;
 
-    let displayAnswers = document.querySelectorAll('li');
-    let currentAnswers = getAnswerArray();
-    for (i = 0; i < displayAnswers.length; i++) {
-        displayAnswers[i].innerText = currentAnswers[i];
-    }   
+  let displayAnswers = document.querySelectorAll('li');
+  let currentAnswers = getAnswerArray();
+  for (i = 0; i < displayAnswers.length; i++) {
+    displayAnswers[i].innerText = currentAnswers[i];
+  }
 
-});
+  // function selectingAnswer() {
+  //   let countScore = 0;
+  //   currentScore = display.querySelector('.currentScore');
+  //   if (selectedAnswer = correctAnswer) {
+      
+  //   }
+  // }
+  
+  // function setOfRandomProblems {
+  //   let problemSet = getRandomProblem(10)
+  // }
 
+
+  //Above want function that if correctAnswer was clicked is true  -Move to the next problem.
+  // Update the current problem number. Update the score.
+
+  // Else if above function when !correctAnswer was clicked on true -Move to the next problem.
+  //Update the current problem number. Score is NOT updated.
+
+// For problems out of 10 and score: Once 1/10 goes to  10/10 the next problem will begin again
+// with 1/10 and the score will reset to 0 being tied to that 10/10 in this small bit of logic.
+
+
+  });
 
 /**
- * TODO make answers clickable; add to current and cumulative score;
- *          move to next problem in problem set (10) -- FOR EACH
- * TODO tally score (logic for correct and incorrect answers); display score
+
  * TODO Start Over single click resets currentProblem
  *      Start Over double click rests problem sets && score
- */ 
-
-
-
-
-
-
-
+ */
 
 
 
@@ -127,13 +143,3 @@ document.addEventListener('DOMContentLoaded', () => {
 //   display.value = 0;
 // }
 
-// let randomAnswers0 = [(mathProblems[0]),(mathProblems[0] + 5), (mathProblems[0]-8), (mathProblems[0]*2)];
-// let randomAnswers1 = [(mathProblems[1]),(mathProblems[1] + 5), (mathProblems[1]-8), (mathProblems[1]*2)];
-// let randomAnswers2 = [(mathProblems[2]),(mathProblems[2] + 5), (mathProblems[2]-8), (mathProblems[2]*2)];
-// let randomAnswers3 = [(mathProblems[3]),(mathProblems[3] + 5), (mathProblems[3]-8), (mathProblems[3]*2)];
-// let randomAnswers4 = [(mathProblems[4]),(mathProblems[4] + 5), (mathProblems[4]-8), (mathProblems[4]*2)];
-// let randomAnswers5 = [(mathProblems[5]),(mathProblems[5] + 5), (mathProblems[5]-8), (mathProblems[5]*2)];
-// let randomAnswers6 = [(mathProblems[6]),(mathProblems[6] + 5), (mathProblems[6]-8), (mathProblems[6]*2)];
-// let randomAnswers7 = [(mathProblems[7]),(mathProblems[7] + 5), (mathProblems[7]-8), (mathProblems[7]*2)];
-// let randomAnswers8 = [(mathProblems[8]),(mathProblems[8] + 5), (mathProblems[8]-8), (mathProblems[8]*2)];
-// let randomAnswers9 = [(mathProblems[9]),(mathProblems[9] + 5), (mathProblems[9]-8), (mathProblems[9]*2)];
