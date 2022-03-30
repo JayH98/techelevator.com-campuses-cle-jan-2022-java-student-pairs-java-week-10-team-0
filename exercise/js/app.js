@@ -1,145 +1,94 @@
-
-
+const currentProblem = document.querySelector('.expression');
+let problemNumber = document.querySelector('.currentProblem');
+let displayAnswers = document.querySelectorAll('li');
+let currentScore = document.querySelector('.currentScore');
 let correctAnswer = null;
+let currentAnswers = null;
 let currentExpression = null;
+let num1 = 0;
+let num2 = 0;
 
 function getRandomNumber(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
 function getAnswerArray() {
-  let answerArray = [getRandomNumber(82), getRandomNumber(82), 
-    getRandomNumber(82), correctAnswer];
+  let answerArray = [getRandomNumber(82), getRandomNumber(82),
+  getRandomNumber(82), correctAnswer];
+  answerArray = shuffleArray(answerArray);
+  for (i = 0; i < displayAnswers.length; i++) {
+    displayAnswers[i].innerText = answerArray[i];
+  }
   return shuffleArray(answerArray);
 }
 
 function getRandomProblem() {
-  let num1 = getRandomNumber(10);
-  let num2 = getRandomNumber(10);
+  num1 = getRandomNumber(10);
+  num2 = getRandomNumber(10);
   correctAnswer = num1 * num2;
   currentExpression = num1 + ' x ' + num2;
+  currentProblem.innerText = currentExpression;
 }
 
 function shuffleArray(arr) {
   return arr.sort(function (a, b) { return Math.random() - 0.5 })
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const currentProblem = document.querySelector('.expression');
+function startOver() {
   getRandomProblem();
-  currentProblem.innerText = currentExpression;
+  newArray = getAnswerArray();
+  let problemToggle = document.querySelectorAll('.show-hide');
+  problemToggle.forEach((problems) => {
+    problems.classList.remove('hidden');
+  });
+  problemNumber.innerText = 0;
+  currentScore.innerText = 0;
+}
 
-  let displayAnswers = document.querySelectorAll('li');
-  let currentAnswers = getAnswerArray();
-  for (i = 0; i < displayAnswers.length; i++) {
-    displayAnswers[i].innerText = currentAnswers[i];
+function addToUserScore() {
+  currentScore.innerText = Number(currentScore.innerText) + 1;
+}
+
+function selectingAnswer() {
+  if (selectedAnswer == correctAnswer) {
+    addToUserScore();
   }
+  getRandomProblem();
+}
 
-  // function selectingAnswer() {
-  //   let countScore = 0;
-  //   currentScore = display.querySelector('.currentScore');
-  //   if (selectedAnswer = correctAnswer) {
-      
-  //   }
-  // }
-  
-  // function setOfRandomProblems {
-  //   let problemSet = getRandomProblem(10)
-  // }
+function addToProblemCount() {
+  problemNumber.innerText = Number(problemNumber.innerText) + 1;
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+  getRandomProblem();
 
-  //Above want function that if correctAnswer was clicked is true  -Move to the next problem.
-  // Update the current problem number. Update the score.
+  let newArray = getAnswerArray();
 
-  // Else if above function when !correctAnswer was clicked on true -Move to the next problem.
-  //Update the current problem number. Score is NOT updated.
-
-// For problems out of 10 and score: Once 1/10 goes to  10/10 the next problem will begin again
-// with 1/10 and the score will reset to 0 being tied to that 10/10 in this small bit of logic.
-
-
+  const btnStartButton = document.getElementById('btnStartOver');
+  btnStartButton.addEventListener('click', (event) => {
+    startOver();
   });
 
-/**
-
- * TODO Start Over single click resets currentProblem
- *      Start Over double click rests problem sets && score
- */
-
-
-
-
-
-// let display;
-// let previous = null;
-// let operator = null;
-// let operatorClicked = false;
-
-// /**
-//  * Calculates the operation and updates the display.
-//  */
-// function performOperation() {
-//   let result;
-//   const current = parseNumber(display.value);
-//   previous = parseNumber(previous);
-
-//   switch(operator) {
-//     case '+' :
-//       result = previous + current;
-//     break;
-//     case '-' :
-//         result = previous - current;
-//     break;
-//     case '*' :
-//         result = previous * current;
-//     break;
-//     case '/' :
-//         result = previous / current;
-//     break;
-//   }
-
-//   display.value = result;
-//   operator = null;
-// }
-
-// /**
-//  * Parses the display value into a number (float or int).
-//  * @param {String} num 
-//  */
-// function parseNumber(num) {
-//   return num.includes('.') ? parseFloat(num) : parseInt(num);
-// }
-
-// /**
-//  * Capture the previous value and the clicked operator
-//  * so that an operation can be performed.
-//  */
-// function clickOperator(event) {
-//   operator = event.target.value;
-//   previous = display.value;
-//   operatorClicked = true;
-// }
-
-// /**
-//  * Captures a number click and updates the display value.
-//  * @param {Event} event 
-//  */
-// function clickNumber(event) {
-//   const val = event.target.value;
-
-//   if( operatorClicked ) {
-//     display.value = val;
-//     operatorClicked = false;
-//   } else {
-//     display.value == 0 ? display.value = val : display.value += val;
-//   }
-
-// }
-
-// /**
-//  * Resets the display value.
-//  */
-// function clear() {
-//   display.value = 0;
-// }
-
+  let selectedAnswer = document.querySelectorAll('li');
+  selectedAnswer.forEach((answer) => {
+    answer.addEventListener('click', (event) => {
+      if (answer.innerText == num1 * num2) {
+        addToUserScore();
+        getRandomProblem();
+        getAnswerArray();
+        addToProblemCount();
+      } else {
+        getRandomProblem();
+        getAnswerArray();
+        addToProblemCount();
+      }
+      if (problemNumber.innerText == 10) {
+        let problemToggle = document.querySelectorAll('.show-hide');
+        problemToggle.forEach((problems) => {
+          problems.classList.add('hidden');
+        });
+      }
+    });
+  });
+});
